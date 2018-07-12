@@ -4,7 +4,7 @@ mkdir intership
 pwd
 2) Clone a remote repo 
 git clone https://github.com/AnnaSagina/probation-repo.git
-git clone https://AnnaSagina@bitbucket.org/AnnaSagina/probation-repo.git
+
 
 check that a remote repo has been addded:
 $ cd probation-repo/
