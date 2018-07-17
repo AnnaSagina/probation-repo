@@ -36,8 +36,10 @@ git add .
 git commit -m "My first commit"
 
 6) Add your changes to master branch (create a pull request)
-git push <remote_server> <branch>
-git push origin ANNA
+git push <remote_server> \<branch>
+
+git push origin my_branch
+
 enter your credentials when prompted.
 
 ....
