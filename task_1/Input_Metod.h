@@ -7,6 +7,10 @@
 
 char messege_about_remaing_data[38] = "Please enter remaining data ";
 char incorr_data_messege[20] = "incorrect data";
+bool a_recording = 0;
+bool b_recording = 0;
+bool ps_recording = 0;
+bool correct_input_flag = true;
 
 void Process_incorect_input(bool &correct_input_) // обработка плохого ввода
 {
@@ -55,69 +59,85 @@ void —omputation_output(char *select_parametr,rectangle &my_rectangle)//вывод по
 			}
 }
 
-bool Data_recording_cmd(char **argv, int &i,rectangle &my_rectangle,char *select_parametr)//запись с командной строки, не придумала как красиво поделить эти функциии(
+bool Is_not_repeat_flag_cmd(char *str_flag)
 {
-	bool error = 1;// проверка допустимости флага
-	if ((argv[i][0]=='-'))
+	if ((strcmp(str_flag,"-a") == 0)&&(a_recording == 1))
+		return 0;
+	if ((strcmp(str_flag,"-b") == 0)&&(b_recording == 1))
+		return 0;
+	if (((strcmp(str_flag,"-s") == 0)||(strcmp(str_flag,"-p") == 0)||(strcmp(str_flag,"-ps") == 0))&&(ps_recording == 1))
+		return 0;
+	return 1;
+}
+
+bool Is_correct_flag_cmd(char *str_flag)
+{
+	if (((strcmp(str_flag,"-a") == 0)||(strcmp(str_flag,"-b") == 0)||(strcmp(str_flag,"-p") == 0)||(strcmp(str_flag,"-s") == 0)||(strcmp(str_flag,"-ps")== 0))&&(Is_not_repeat_flag_cmd(str_flag)))
+		return 1;
+	return 0;
+}
+
+bool Data_recording_cmd(int argc,char **argv, int &i,rectangle &my_rectangle,char *select_parametr)//запись с командной строки, не придумала как красиво поделить эти функциии(
+{
+	if ((argv[i][0]=='-')&&(Is_correct_flag_cmd(argv[i])))
 	{
-		if (strcmp(argv[i],"-a") == 0)
+		if ((strcmp(argv[i],"-a") == 0)&&(i+1<argc))
 		{
 			if (atoi(argv[i+1]) == 0)
 				return 0;//провер€ю что за флагом идет число , как по другому не знаю, потому что атой возвращает ноль если это буква
 			my_rectangle.width = atoi(argv[i+1]);
 			i++; 
-			error = 0;
+			a_recording = 1;
 		}
-		if (strcmp(argv[i],"-b") == 0)
+		if ((strcmp(argv[i],"-b") == 0)&&(i+1<argc))
 		{
 			if (atoi(argv[i+1]) == 0)
 				return 0;//провер€ю что за флагом идет число
-			my_rectangle.height = atoi(argv[i+1]); i++;
-			error = 0;
+			my_rectangle.height = atoi(argv[i+1]); 
+			i++;
+			b_recording = 1;
 		}
-		if ((strcmp( argv[i],"-p")== 0)||(strcmp(argv[i],"-s") == 0)||(strcmp(argv[i],"-ps") == 0))
+		if ((strcmp(argv[i],"-p")== 0)||(strcmp(argv[i],"-s") == 0)||(strcmp(argv[i],"-ps") == 0))
 		{
 			strcpy(select_parametr,argv[i]);
-			error = 0;
+			ps_recording = 1;
 		}
-
+		return 1;
 	}
-		if (error == 1)
-			return 0;
-		else 
-			return 1;
+	else
+		return 0;		
 }
 
-void Input_remaing_data_and_recording(int argc,char *select_parametr,bool &correct_input_flag, rectangle &my_rectangle)//ввод данных оставшихс€, после командной строки
+void Input_remaing_data_and_recording(char *select_parametr,rectangle &my_rectangle)//ввод данных оставшихс€, после командной строки
 {
-	if (argc == 1)
+	if (a_recording == 0)
 	{
 		cout << "width a "<< endl;
 		cin >> my_rectangle.width;
 		if (Is_bad_enter(correct_input_flag))//проверили что число
 			return ;
 	}
-		if ((argc == 1)||(argc == 3))
-		{
-			cout << "height b"<< endl;
-			cin >>  my_rectangle.height;;
-					if (Is_bad_enter(correct_input_flag))//проверили что число
-				return ;
-		}
-		if (argc != 6)
-		{
-			cout << "-p/-s/-ps (square/perimetr/both)"<< endl;
-			cin >> select_parametr;	
-		}
+	if (b_recording == 0)
+	{
+		cout << "height b"<< endl;
+		cin >>  my_rectangle.height;;
+		if (Is_bad_enter(correct_input_flag))//проверили что число
+			return ;
+	}
+	if (ps_recording == 0)
+	{
+		cout << "-p/-s/-ps (square/perimetr/both)"<< endl;
+		cin >> select_parametr;	
+	}
 }
 
-void Data_recording(int argc,char **argv,char *select_parametr,rectangle &my_rectangle,bool & correct_input_flag)//запись данных
+void Data_recording(int argc,char **argv,char *select_parametr,rectangle &my_rectangle)//запись данных
 {
 	for (int i = 1;i <= 5; i++)
 	{
 		if (argc >= (i+1))//запись с командной строки
 		{
-			if(Data_recording_cmd(argv,i,my_rectangle,select_parametr) == 0)
+			if (Data_recording_cmd(argc,argv,i,my_rectangle,select_parametr) == 0)
 				{
 					correct_input_flag = false;	
 					cout << incorr_data_messege << endl;
@@ -127,7 +147,7 @@ void Data_recording(int argc,char **argv,char *select_parametr,rectangle &my_rec
 		else
 		{
 			cout << messege_about_remaing_data << endl;
-			Input_remaing_data_and_recording(argc,select_parametr,correct_input_flag,my_rectangle);//ввод оставшихс€ данных с клавиатуры+запись
+			Input_remaing_data_and_recording(select_parametr,my_rectangle);//ввод оставшихс€ данных с клавиатуры+запись
 			break;
 		}
 	}

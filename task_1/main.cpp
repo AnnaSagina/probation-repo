@@ -11,11 +11,9 @@ void main(int argc,char **argv)
 	char *select_parametr = new char[11]; // Square,Perimetr,Both
 	int a = 0,b = 0;
 	rectangle my_rectangle(a,b);
-	bool correct_input_flag = true;
-
 	while(continuation_check == 1)
 	{
-		Data_recording(argc,argv,select_parametr,my_rectangle,correct_input_flag);
+		Data_recording(argc,argv,select_parametr,my_rectangle);
 		
 		if (correct_input_flag)
 		{
@@ -25,6 +23,9 @@ void main(int argc,char **argv)
 		argc = 1;
 		cout <<"1.continue"<<endl;
 		cout <<"2.exit"<<endl;
+		a_recording = 0;
+		b_recording = 0;
+		ps_recording = 0;
 		cin >> continuation_check;
 	
 	}
