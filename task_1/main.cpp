@@ -17,13 +17,13 @@ void main(int argc,char **argv)
 		if (Data_recording(argc,argv,select_parametr,my_rectangle))
 		{
 				if (strcmp(select_parametr,"-s") == 0)
-					cout <<"Square = "<< Calculation_square(select_parametr,my_rectangle) << endl;
+					cout <<"Square = "<< Calculate_square(my_rectangle) << endl;
 				else if  (strcmp(select_parametr,"-p") == 0)
-					cout <<"Perimetr = "<< Calculation_perimetr(select_parametr,my_rectangle) << endl;
+					cout <<"Perimetr = "<< Calculate_perimetr(my_rectangle) << endl;
 				else if (strcmp(select_parametr,"-ps") == 0)
 				{
-					cout <<"Square = "<< Calculation_square(select_parametr,my_rectangle) << endl;
-					cout <<"Perimetr = "<< Calculation_perimetr(select_parametr,my_rectangle) << endl;
+					cout <<"Square = "<< Calculate_square(my_rectangle) << endl;
+					cout <<"Perimetr = "<< Calculate_perimetr(my_rectangle) << endl;
 				}
 				else
 					cout <<INCORR_DATA_MESSEGE<< endl; // по сути это тоже плохой ввод, но отличается от ввода а и б

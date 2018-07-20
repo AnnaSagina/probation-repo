@@ -29,11 +29,11 @@ bool Is_bad_enter() //presence of bad input
 	}
 	return 0;
 }
-int Calculation_square(char *_select_parametr,rectangle &my_rectangle)
+int Calculate_square(rectangle &my_rectangle)
 {
 	return (my_rectangle.Get_height() * my_rectangle.Get_width());			
 }
-int Calculation_perimetr(char *select_parametr,rectangle &my_rectangle)//вычисление периметра
+int Calculate_perimetr(rectangle &my_rectangle)//вычисление периметра
 {
 	return 2*(my_rectangle.Get_height() + my_rectangle.Get_width());	
 }
