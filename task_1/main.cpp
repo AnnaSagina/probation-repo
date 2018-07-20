@@ -11,15 +11,23 @@ void main(int argc,char **argv)
 	char *select_parametr = new char[11]; // Square,Perimetr,Both
 	int a = 0,b = 0;
 	rectangle my_rectangle(a,b);
+
 	while(continuation_check == 1)
-	{
-		Data_recording(argc,argv,select_parametr,my_rectangle);
-		
-		if (correct_input_flag)
+	{	
+		if (Data_recording(argc,argv,select_parametr,my_rectangle))
 		{
-			Сomputation_output(select_parametr,my_rectangle);
+				if (strcmp(select_parametr,"-s") == 0)
+					cout <<"Square = "<< Calculation_square(select_parametr,my_rectangle) << endl;
+				else if  (strcmp(select_parametr,"-p") == 0)
+					cout <<"Perimetr = "<< Calculation_perimetr(select_parametr,my_rectangle) << endl;
+				else if (strcmp(select_parametr,"-ps") == 0)
+				{
+					cout <<"Square = "<< Calculation_square(select_parametr,my_rectangle) << endl;
+					cout <<"Perimetr = "<< Calculation_perimetr(select_parametr,my_rectangle) << endl;
+				}
+				else
+					cout <<INCORR_DATA_MESSEGE<< endl; // по сути это тоже плохой ввод, но отличается от ввода а и б
 		}		
-		
 		argc = 1;
 		cout <<"1.continue"<<endl;
 		cout <<"2.exit"<<endl;
