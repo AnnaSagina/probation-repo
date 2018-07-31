@@ -90,42 +90,45 @@ double Handler::Calculate_radius_described_circle(Rectangle _rectangle)
 
 void Handler::main_func_of_handler()
 {
-	if (config[0] == 1)
+	if (config[3] == 1)
 		cout << "Square = " << Calculate_square(this->Get_data()) << endl;
 	else
 		cout << "Perimetr = " << Calculate_perimetr(this->Get_data()) << endl;
 
 	cout << endl;
-	if (config[1] == 1)
+	if (config[2] == 1)
 	{
-		cout << " New rectangle stretched to square:" << endl;
+		cout << "New rectangle stretched to square:" << endl;
 		Stretch_rectangle_to_square(this->Get_data()).Print_rectangle();
 	}
 	else
 	{
-		cout << " New rectangle squeezed to square:" << endl;
+		cout << "New rectangle squeezed to square:" << endl;
 		Squeeze_rectangle_to_square(this->Get_data()).Print_rectangle();
 	}
 
 	cout << endl;
-	if (config[2] == 1)
+	if (config[1] == 1)
 	{
-		cout << " New rectangle increased by two:" << endl;
+		cout << "New rectangle increased by two:" << endl;
 		Increase_by_two(this->Get_data()).Print_rectangle();
 	}
 	else
 	{
-		cout << " New rectangle reduced by two:" << endl;
+		cout << "New rectangle reduced by two:" << endl;
 		Reduce_by_two(this->Get_data()).Print_rectangle();
 	}
 	cout << endl;
 
-	if (config[3] == 1)
+	if (config[0] == 1)
 	{
-		cout << " Radius inscribed circle = " << Calculate_radius_inscribed_circle(this->Get_data());
+		if (Calculate_radius_inscribed_circle(this->Get_data()) == -1)
+			cout << "Radius inscribed circle indefined for this figure" << endl;
+		else
+		cout << "Radius inscribed circle = " << Calculate_radius_inscribed_circle(this->Get_data()) << endl;
 	}
 	else
 	{	
-		cout <<" Radius described circle = " <<  Calculate_radius_described_circle(this->Get_data());
+		cout <<"Radius described circle = " <<  Calculate_radius_described_circle(this->Get_data()) << endl;
 	}
 }
