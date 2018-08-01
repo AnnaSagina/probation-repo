@@ -10,7 +10,7 @@ void Execute_the_selected_function(int _choose_value, int  _number)
 	{
 		case 1:
 		{
-			cout << ANSWER << Ñounting_bits_equal_to_one(_number) <<  endl;
+			cout << ANSWER << Counting_bits_equal_to_one(_number) <<  endl;
 			break;
 		}
 		case 2:
@@ -19,8 +19,8 @@ void Execute_the_selected_function(int _choose_value, int  _number)
 			cin >> position;
 			if (Is_the_number_acceptable(_number,_choose_value)) 
 			{
-				cout << ANSWER << Replacement_of_the_i_th_bit_by_one(_number,position) << 
-					"( " << BINARY_FORM  << conversion_from_decimal_to_binary(Replacement_of_the_i_th_bit_by_one(_number,position))<<")"<< endl ;
+				cout << ANSWER << set_bit_i(_number,position) << 
+					"( " << BINARY_FORM  << dec2bin(set_bit_i(_number,position))<<")"<< endl ;
 				break;
 			}
 			break;
@@ -30,7 +30,7 @@ void Execute_the_selected_function(int _choose_value, int  _number)
 			if (Is_the_number_acceptable(_number)) 
 			{
 				cout << ANSWER << Bit_cyclic_shift(_number) << 
-					"(" << BINARY_FORM  << conversion_from_decimal_to_binary( Bit_cyclic_shift(_number))<<")"<< endl ;
+					"(" << BINARY_FORM  << dec2bin( Bit_cyclic_shift(_number))<<")"<< endl ;
 				break;
 			}
 			break;
@@ -61,7 +61,7 @@ void main()
 		}
 		while(!Is_good_enter());
 	
-		cout << "(" <<BINARY_FORM << conversion_from_decimal_to_binary(number)<< ")" << endl;	
+		cout << "(" <<BINARY_FORM << dec2bin(number)<< ")" << endl;	
 		Execute_the_selected_function(choose_value, number);
 		cout << "Do you want to continue?" << endl;
 		cout << "1. yes" << endl;;

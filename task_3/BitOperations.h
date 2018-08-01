@@ -6,7 +6,7 @@
 
 using namespace std;
 
-int Ñounting_bits_equal_to_one(int _number)
+int Counting_bits_equal_to_one(int _number)
 {	
 	int count = 0;
 	while(_number)
@@ -18,7 +18,7 @@ int Ñounting_bits_equal_to_one(int _number)
 	return count;
 }
 
-int Replacement_of_the_i_th_bit_by_one(int _number, int i)
+int set_bit_i(int _number, int i)
 {
 	int result = 0;
 	int mask;
@@ -33,7 +33,7 @@ int Bit_cyclic_shift(int _number)
 	return (int)value_bit;
 }
 
-unsigned __int64 conversion_from_decimal_to_binary(int _number)
+unsigned __int64 dec2bin(int _number)
 {
 	unsigned __int64 binary_form = 0;
 	unsigned __int64 digit = 1;
