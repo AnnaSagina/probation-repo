@@ -32,5 +32,8 @@
     <ClInclude Include="InputMetod.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="StructforHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

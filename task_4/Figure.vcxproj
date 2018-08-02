@@ -81,6 +81,7 @@
     <ClInclude Include="Handler.h" />
     <ClInclude Include="InputMetod.h" />
     <ClInclude Include="Rectangle.h" />
+    <ClInclude Include="StructforHandler.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -3,25 +3,14 @@
 
 using namespace std;
 
-Handler::Handler(Rectangle object,bitset<4> _config)
+Handler::Handler(bitset<4> _config)
 {
-	rectangle = object ;
 	config = _config;
 }
 
 void Handler::Set_config(bitset<4> _config)
 {
 	config = _config;
-}
-
-void Handler::Set_data(Rectangle _rectangle)
-{
-	rectangle = _rectangle;
-}
-
-Rectangle Handler::Get_data()
-{
-	return rectangle;
 }
 
 bitset<4> Handler::Get_config()
@@ -84,51 +73,56 @@ double Handler::Calculate_radius_inscribed_circle(Rectangle _rectangle)
 
 double Handler::Calculate_radius_described_circle(Rectangle _rectangle)
 {
-	double diagonal = sqrt((double)(_rectangle.Get_height()*_rectangle.Get_width()));
+	double diagonal = sqrt((double)(pow(_rectangle.Get_height(),2)+pow(_rectangle.Get_width(),2)));
 	return diagonal/2;
 }
 
-void Handler::main_func_of_handler()
+ struct_for_Handler Handler::main_func_of_handler(Rectangle rectangle)
 {
-	if (config[3] == 1)
-		cout << "Square = " << Calculate_square(this->Get_data()) << endl;
-	else
-		cout << "Perimetr = " << Calculate_perimetr(this->Get_data()) << endl;
+	struct_for_Handler my_handler;
 
-	cout << endl;
+	if (config[3] == 1)
+		my_handler.Perimetr_or_square = Calculate_square(rectangle);
+	else
+		my_handler.Perimetr_or_square =  Calculate_perimetr(rectangle);
+
 	if (config[2] == 1)
 	{
-		cout << "New rectangle stretched to square:" << endl;
-		Stretch_rectangle_to_square(this->Get_data()).Print_rectangle();
+		my_handler.Square = Stretch_rectangle_to_square(rectangle);
 	}
 	else
 	{
-		cout << "New rectangle squeezed to square:" << endl;
-		Squeeze_rectangle_to_square(this->Get_data()).Print_rectangle();
+		my_handler.Square = Squeeze_rectangle_to_square(rectangle);		
 	}
-
-	cout << endl;
 	if (config[1] == 1)
 	{
-		cout << "New rectangle increased by two:" << endl;
-		Increase_by_two(this->Get_data()).Print_rectangle();
+		my_handler.ResizeRec = Increase_by_two(rectangle);
 	}
 	else
 	{
-		cout << "New rectangle reduced by two:" << endl;
-		Reduce_by_two(this->Get_data()).Print_rectangle();
+		my_handler.ResizeRec = Reduce_by_two(rectangle);
 	}
-	cout << endl;
 
 	if (config[0] == 1)
 	{
-		if (Calculate_radius_inscribed_circle(this->Get_data()) == -1)
-			cout << "Radius inscribed circle indefined for this figure" << endl;
-		else
-		cout << "Radius inscribed circle = " << Calculate_radius_inscribed_circle(this->Get_data()) << endl;
+		my_handler.radius = Calculate_radius_inscribed_circle(rectangle);
 	}
 	else
 	{	
-		cout <<"Radius described circle = " <<  Calculate_radius_described_circle(this->Get_data()) << endl;
+		my_handler.radius = Calculate_radius_described_circle(rectangle);
 	}
-}
+	return my_handler;
+ }
+
+ void Handler::printstruct(map<string,struct_for_Handler> MapForHandler, string str_st)
+ {
+	auto i = MapForHandler.find(str_st);
+	cout << "Perimetr or Square: ";
+	cout << (*i).second.Perimetr_or_square << endl;
+	cout << "Square:" << endl;
+	(*i).second.Square.Print_rectangle();
+	cout << "Resize:" << endl;
+	(*i).second.ResizeRec.Print_rectangle();
+	cout << "Radius: ";
+	cout << (*i).second.radius << endl;
+ }

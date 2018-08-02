@@ -5,10 +5,10 @@ using namespace std;
 
 const char INCORR_DATA_MESSEGE[20] = "incorrect data";
 
-bool Is_good_input_config(char* str_config)
+bool Is_good_input_config(string str_config)
 {
 	int i = 0 ;
-	while ((str_config[i] == '0')||(str_config[i] == '1'))
+	while ((i < str_config.size())&&((str_config[i] == '0')||(str_config[i] == '1')))
 		i++;
 	if (i != 4)
 	{
