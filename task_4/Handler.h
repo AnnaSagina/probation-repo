@@ -34,13 +34,7 @@ public:
 
 	bitset<4> Get_config();
 
-	void Set_data(Rectangle _rectangle);
-
-	Rectangle Get_data();
-
 	struct_for_Handler main_func_of_handler(Rectangle rectangle);
-
-	void printstruct(map<string,struct_for_Handler> MapForHandler, string str_st);
 };
 
 #endif

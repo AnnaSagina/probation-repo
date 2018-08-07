@@ -18,8 +18,4 @@ bool Is_good_input_config(string str_config)
 	return 1;
 }
 
-bool Is_bad_input_data()
-{
-	return 0;
-}
 #endif

@@ -113,16 +113,3 @@ double Handler::Calculate_radius_described_circle(Rectangle _rectangle)
 	}
 	return my_handler;
  }
-
- void Handler::printstruct(map<string,struct_for_Handler> MapForHandler, string str_st)
- {
-	auto i = MapForHandler.find(str_st);
-	cout << "Perimetr or Square: ";
-	cout << (*i).second.Perimetr_or_square << endl;
-	cout << "Square:" << endl;
-	(*i).second.Square.Print_rectangle();
-	cout << "Resize:" << endl;
-	(*i).second.ResizeRec.Print_rectangle();
-	cout << "Radius: ";
-	cout << (*i).second.radius << endl;
- }
