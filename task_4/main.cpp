@@ -33,18 +33,18 @@ void main()
 		{
 			bitset<4> config(str_config);
 			Rectangle rectangle(a,b);
-
+			Handler*  my_handler = NULL;
 			if ((i = MapForHandler.find(str_config)) != MapForHandler.end())
 			{
+				my_handler = (*i).second;
 				cout << "I FIND IN MAP" << endl;
-				(*i).second->main_func_of_handler(rectangle).print();
 			}
 			else
 			{
-				Handler*  my_handler = new Handler(config);
-				my_handler->main_func_of_handler(rectangle).print();
+				my_handler = new Handler(config);
 				MapForHandler.insert(pair<string,Handler*>(str_config, my_handler));
 			}
+			my_handler->main_func_of_handler(rectangle).print();
 			cout << "Continue?" << endl;
 			cout << "1.Yes" << endl;
 			cin >> continue_flag;
