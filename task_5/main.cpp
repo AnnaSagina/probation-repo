@@ -13,8 +13,10 @@ void main()
 		list_int.PushEnd(i);
 		list_int.PushBegin(i);
 	}
-
 	list_int.Print();
+	cout << "" << endl;
+	cout << " Count data = 0 :" << list_int.Count_Node_with_data(0);
+	cout << "" << endl;
 
 	list_int.DeleteNode(6);
 	list_int.DeleteNode(28);
@@ -29,7 +31,14 @@ void main()
 	if (list_int.IsEmpty())
 	cout << "Delete list";
 	cout << "" << endl;
+	cout << "Added 2 elemets";
+	cout << "" << endl;
+	list_int.PushBegin(1);
+	list_int.PushEnd(2);
 	list_int.Print();
+	list_int.Delete();
+	cout << "" << endl;
+
 	cout << "New list of strings:" << endl;
 	list_string.PushEnd("I");
 	list_string.PushEnd("have");

@@ -19,7 +19,7 @@ public:
 	int Count_Node_with_data(Type data);
 	void DeleteHead();
 	void Delete();
-	void DeleteNode(int pos);
+	void DeleteNode(unsigned int pos);
 	void Print();
 };
 
@@ -40,17 +40,18 @@ template <class Type>
 void List<Type>::PushBegin(Type data)
 {
 	Node<Type> *temp = new Node<Type>(data);
-	temp->SetNext(head);
-	head = temp ;
-	if(tail == NULL)// if list empty --> head = NULL = tail  , if list have 1 node -- > head = tail = thisnode
-		tail = head;
+	if(IsEmpty())
+		tail = temp;
+	else
+		temp->SetNext(head);
+	head = temp;
 }
 
 template <class Type>
 void List<Type>::PushEnd(Type data)
 {
 	Node<Type> *temp = new Node<Type>(data);
-	if (head == NULL) // head = NULL = tail , if list empty , if list have 1 node, head = tail = thisnode
+	if (IsEmpty()) // head = NULL = tail , if list empty , if list have 1 node, head = tail = thisnode
 		head = temp;
 	else
 		tail->SetNext(temp);
@@ -60,7 +61,7 @@ void List<Type>::PushEnd(Type data)
 template <class Type>
 bool List<Type>::IsEmpty()
 {
-	if (head == NULL)
+	if ((head == NULL)&&(tail == NULL))
 		return 1;
 	return 0;
 }
@@ -68,14 +69,14 @@ bool List<Type>::IsEmpty()
 template <class Type>
 int List<Type>::Count_Node_with_data(Type data)
 {
-	int count;
+	int count = 0;
 	Node<Type> *temp = head;
 
 	while(temp != NULL)
 	{
 		if (temp->GetData() == data)
-			cout++;
-		temp = temp->GetNext;
+			count++;
+		temp = temp->GetNext();
 	
 	}
 	return count;
@@ -89,17 +90,20 @@ void List<Type>::DeleteHead()
 	Node<Type> *curr = head;
 	head = curr->GetNext() ;
 	delete curr;
+	curr = NULL;
+	if (head ==	NULL)
+		tail = NULL;
 }
 
 template <class Type>
 void List<Type>::Delete()
 {
-	while (head != NULL)
+	while (!IsEmpty())
 		DeleteHead();
 }
 
 template <class Type>
-void List<Type>::DeleteNode(int pos)
+void List<Type>::DeleteNode(unsigned int pos)
 {
 	if(IsEmpty())
 		return;
