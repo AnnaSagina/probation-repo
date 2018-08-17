@@ -9,20 +9,25 @@ class List
 private:
 	Node<Type>* head;
 	Node<Type>* tail;
+	void DeleteHead();
+	void Delete();
 
 public:
 	List();
 	~List();
 	bool IsEmpty();
 	void PushBegin(Type data);
-	void PushEnd(Type data);
+	void Push(Type data);
+	int Find(Type Data);
 	int Count_Node_with_data(Type data);
-	void DeleteHead();
-	void Delete();
 	void DeleteNode(unsigned int pos);
 	void Print();
 };
+template <class Type>
+int vdd()
+{
 
+}
 template <class Type>
 List<Type>::List()
 {
@@ -37,6 +42,22 @@ List<Type>::~List()
 }
 
 template <class Type>
+int List<Type>::Find(Type Data)
+{
+	Node<Type> *temp = head;
+	int i = 0;
+	if (IsEmpty())
+		return -1;
+	while (temp->GetData() != Data)
+	{
+		temp = temp->GetNext();
+			if (temp == NULL)
+				return -1;
+		i++;
+	}
+	return i;
+}
+template <class Type>
 void List<Type>::PushBegin(Type data)
 {
 	Node<Type> *temp = new Node<Type>(data);
@@ -48,7 +69,7 @@ void List<Type>::PushBegin(Type data)
 }
 
 template <class Type>
-void List<Type>::PushEnd(Type data)
+void List<Type>::Push(Type data)
 {
 	Node<Type> *temp = new Node<Type>(data);
 	if (IsEmpty()) // head = NULL = tail , if list empty , if list have 1 node, head = tail = thisnode
