@@ -2,28 +2,21 @@
 using namespace std;
 void main()
 {
-	Node* One = new Node;
-	Node* Two = new Node;
-	Node* Three = new Node;
-	Node* Four = new Node;
-	Node* Five = new Node;
-	Node* Six = new Node;
-	One->Data = 1;
-	One->next = Two;
-	Two->Data = 2;
-	Two->next = Three;
-	Three->Data = 3;
-	Three->next = Four;
-	Four->Data = 4;
-	Four->next = Five;
-	Five->Data = 5;
-	Five->next = Six;
-	Six->Data = 6;
-	Six->next = Two;
+	Node** List = new Node*[6];
+	for (int i = 0; i < 6; i++)
+	{
+		List[i] = new Node;
+		List[i]->Data = i;
+	}
+	for (int i = 0; i < 5; i++)
+	{
+		List[i]->next = List[i + 1];
+	}
+	List[5]->next = List[2];
 
-	Node* fast = One;
-	Node* slow = One;
-	int i = 1;
+	Node* fast = List[0];
+	Node* slow = List[0];
+	bool flag = 0;
 	do
 	{
 		if (fast == NULL)
@@ -32,11 +25,11 @@ void main()
 			break;
 		}
 		fast = fast->next;
-		if (i % 2 == 0)
+		if (flag)
 		{
 			slow = slow->next;
 		}
-		i++;
+		flag = !flag;
 	} while(fast != slow);
 	
 	cout <<slow->Data;
