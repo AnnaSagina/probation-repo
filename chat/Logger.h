@@ -10,42 +10,40 @@ std::mutex _lock1;
 class Logger
 {
 private:
-	std::string AllRec = "";
+	std::string AllRec;
 	Logger() { }
 	~Logger() { }
 	Logger(Logger const&);
-
+	Logger& operator= (Logger const&);
 public:
-	static Logger& Instance(std::string rec)
+	static Logger& Instance()
 	{
 		static Logger s;
-		s.AllRec += rec + "\n";
 		return s;
 	}
-	void ClearRec()
+	void AddStr(std::string rec)
 	{
-		AllRec = "";
-	}
-	std::string GetAllRec()
-	{
-		return AllRec;
+		_lock1.lock();
+		AllRec += rec + "\n";
+		_lock1.unlock();
 	}
 	void AddAllRec()
 	{
-		
 		while (1)
 		{
-			if (GetAllRec() != "")
+			Sleep(5000);
+			if (AllRec != "")
 			{
-				_lock1.lock();
+				
 				std::ofstream out("C:/Users/amalova/Documents/Visual Studio 2010/Projects/MyServer/log/logger.txt", std::ios::app);
 				if (out.is_open())
 				{
-					out << GetAllRec();
-					ClearRec();
+					_lock1.lock();
+					out << AllRec;
+					AllRec = "";
+					_lock1.unlock();
 				}
 				out.close();
-				_lock1.unlock();
 			}
 		}
 	}
