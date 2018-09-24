@@ -46,9 +46,7 @@ public:
 	{
 		if (j_mes["to"] == "all")
 		{
-			//_lock.lock();
 			room.push_back(j_mes);
-			//_lock.unlock();
 			SendUpdate();
 		}
 	}
