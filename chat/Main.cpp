@@ -93,7 +93,7 @@ string DoingCommand(string data, string _nick, bool &exit)
 					exit = 1;
 					lock_map.lock();
 					MsgQueueMap.erase(_nick);		
-					lock_map.lock();
+					lock_map.unlock();
 					string str = "The user '" + _nick + "' has been disconnected \n";
 					Logger::Instance().AddStr(to_simple_string(boost::posix_time::second_clock::local_time()) + ":" + str);
 					json msg2 = { {"type","1"},{"from","server"},{"to","all"},{"text", str} };
@@ -221,7 +221,7 @@ void MainFuncTread(socket_ptr sock)
 					stream.clear();
 					if (exit)
 					{
-						cout << "user " << nick << " disconeted" << endl;
+						cout << "user " << nick << " disconeted \n" << endl;
 						cout << "connected users: " << MsgQueueMap.size();
 						break;
 					}

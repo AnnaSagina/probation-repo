@@ -52,7 +52,7 @@ public:
 	}
 	std::string ReturnLast()
 	{
-		return room.back().dump();
+		return room.back().dump(); 
 	}
 	std::string ReturnTenMes()
 	{
